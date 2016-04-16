@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="include">
+			<UniqueIdentifier>{31C43444-D0B0-9049-B60E-42F9AA2532D5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="include\glmesh">
+			<UniqueIdentifier>{DC3CAFBD-E13D-F540-8B13-CFF2D28807EC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="source">
+			<UniqueIdentifier>{07A243F2-A393-9A47-ACD2-A48076FA8072}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="include\glmesh\BoostDraw.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\BoostVertexFormat.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\CpuDataWriter.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\Draw.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\GenCommon.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\GenDescriptors.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\GenMeshMisc.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\GenPlatonic.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\GenQuadrics.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\glmesh.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\Mesh.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\StreamBuffer.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\VertexFormat.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="include\glmesh\VertexWriter.h">
+			<Filter>include\glmesh</Filter>
+		</ClInclude>
+		<ClInclude Include="source\GenHelper.h">
+			<Filter>source</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="source\CpuDataWriter.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\Draw.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\GenHelper.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\GenMeshMisc.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\GenPlatonic.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\GenQuadrics.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\Mesh.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\StreamBuffer.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\VertexFormat.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<ClCompile Include="source\VertexWriter.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+	</ItemGroup>
+</Project>
