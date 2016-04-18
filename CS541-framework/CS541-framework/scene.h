@@ -49,7 +49,8 @@ public:
     int width, height;
 
     // Shader programs
-    ShaderProgram lightingShader;
+	ShaderProgram lightingShader;
+	ShaderProgram geometryShader;
 
     // The polygon models
     Model* centralPolygons;

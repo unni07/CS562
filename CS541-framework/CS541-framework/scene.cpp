@@ -124,6 +124,10 @@ void InitializeScene(Scene &scene)
     glBindAttribLocation(scene.lightingShader.program, 3, "vertexTangent");
     scene.lightingShader.LinkProgram();
 
+	scene.geometryShader.CreateProgram();
+	scene.geometryShader.CreateShader("geometry.vert", GL_VERTEX_SHADER);
+	scene.geometryShader.CreateShader("geometry.frag", GL_FRAGMENT_SHADER);
+
     // Read in the needed texture maps
     try {
         glimg::ImageSet* img;
