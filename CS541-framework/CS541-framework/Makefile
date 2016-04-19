@@ -8,7 +8,7 @@ target = framework.exe
 src1 = framework.cpp models.cpp scene.cpp shader.cpp fbo.cpp
 src2 = rply.c
 headers = scene.h shader.h fbo.h models.h rply.h AntTweakBar.h
-extras = framework.vcxproj Makefile AntTweakBar.dll AntTweakBar.lib 6670-bump.jpg 6670-diffuse.jpg 6670-normal.jpg
+extras = framework.vcxproj Makefile AntTweakBar.dll AntTweakBar.lib 6670-bump.jpg 6670-diffuse.jpg 6670-normal.jpg effects.png earth.png
 shaders = lighting.frag lighting.vert
 
 pkgFiles = $(src1) $(src2) $(shaders) $(headers) $(extras)
@@ -34,7 +34,7 @@ zip562: $(pkgFiles)
 	rm -rf ../CS562-framework ../CS562-framework.zip
 	mkdir ../CS562-framework
 	cp -r $(pkgFiles) ../CS562-framework
-	cp ../../assets/bunny.ply ../CS541-framework
+	cp ../../assets/bunny.ply ../CS562-framework
 	cp -r ../glsdk  ../CS562-framework
 	cd ..;  zip -r CS562-framework.zip CS562-framework; rm -rf CS562-framework
 
@@ -43,14 +43,14 @@ zip541: $(pkgFiles)
 	mkdir ../CS541-framework
 	cp -r $(pkgFiles) ../CS541-framework
 	cp ../../assets/bunny.ply ../CS541-framework
-	cp -r ../glsdk ../CS300-framework
+	cp -r ../glsdk ../CS541-framework
 	cd ..;  zip -r CS541-framework.zip CS541-framework; rm -rf CS541-framework
 
 zip300: $(pkgFiles)
 	rm -rf ../CS300-framework ../CS300-framework.zip
 	mkdir ../CS300-framework
 	cp -r $(pkgFiles) ../CS300-framework
-	cp ../../assets/bunny.ply ../CS541-framework
+	cp ../../assets/bunny.ply ../CS300-framework
 	cp -r ../glsdk ../CS300-framework
 	cd ..;  zip -r CS300-framework.zip CS300-framework; rm -rf CS300-framework
 

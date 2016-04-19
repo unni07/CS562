@@ -364,7 +364,7 @@ vec3 TeapotPoints[] = {
 // patches is represented by an n by n grid of quads.
 Teapot::Teapot(const int n)
 {
-    diffuseColor = vec3(0.3, 0.3, 0.1);
+    diffuseColor = vec3(0.5, 0.5, 0.1);
     specularColor = vec3(1.0, 1.0, 1.0);
     shininess = 120.0;
     animate = true;
@@ -462,9 +462,9 @@ Teapot::Teapot(const int n)
 
 ////////////////////////////////////////////////////////////////////////
 // Generates a sphere with normals, texture coords, and tangent vectors.
-Earth::Earth(const float n)
+Sphere::Sphere(const int n)
 {
-    diffuseColor = vec3(1, 1, 1);
+    diffuseColor = vec3(0.5, 0.5, 1.0);
     specularColor = vec3(1.0, 1.0, 1.0);
     shininess = 120.0;
 
@@ -478,7 +478,7 @@ Earth::Earth(const float n)
             float z = cos(t);
             Pnt.push_back(vec4(x,y,z,1.0f));
             Nrm.push_back(vec3(x,y,z));
-            Tex.push_back(vec2(s/(2*PI), -t/PI));
+            Tex.push_back(vec2(s/(2*PI), t/PI));
             Tan.push_back(vec3(-sin(s), cos(s), 0.0));
             if (i>0 && j>0) {
                 Quad.push_back(ivec4((i-1)*(n+1) + (j-1),
@@ -491,45 +491,12 @@ Earth::Earth(const float n)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Generates a sphere with normals, texture coords, and tangent vectors.
-Sphere::Sphere(const int n)
-{
-	diffuseColor = vec3(0.5, 0.5, 0.5);
-	specularColor = vec3(1.0, 1.0, 1.0);
-	shininess = 120.0;
-
-	float d = 2.0f*PI / float(n * 2);
-	for (int i = 0; i <= n * 2; i++) {
-		float s = i*2.0f*PI / float(n * 2);
-		for (int j = 0; j <= n; j++) {
-			float t = j*PI / float(n);
-			float x = cos(s)*sin(t);
-			float y = sin(s)*sin(t);
-			float z = cos(t);
-			Pnt.push_back(vec4(x, y, z, 1.0f));
-			Nrm.push_back(vec3(x, y, z));
-			Tex.push_back(vec2(s / (2 * PI), t / PI));
-			Tan.push_back(vec3(-sin(s), cos(s), 0.0));
-			if (i>0 && j>0) {
-				Quad.push_back(ivec4((i - 1)*(n + 1) + (j - 1),
-					(i - 1)*(n + 1) + (j),
-					(i)*(n + 1) + (j),
-					(i)*(n + 1) + (j - 1)));
-			}
-		}
-	}
-	printf("shpere: ");
-	ComputeSize();
-	MakeVAO();
-}
-
-////////////////////////////////////////////////////////////////////////
 // Generates a plane with normals, texture coords, and tangent vectors
 // from an n by n grid of small quads.  A single quad might have been
 // sufficient, but that works poorly with the reflection map.
 Ply::Ply(const char* name, const bool reverse)
 {
-    diffuseColor = vec3(0.8, 0.8, 0.8);
+    diffuseColor = vec3(0.8, 0.8, 0.5);
     specularColor = vec3(1.0, 1.0, 1.0);
     shininess = 120.0;
 
@@ -639,7 +606,7 @@ Ground::Ground(const float r, const int n)
     std::vector<vec3> Tan;
     std::vector<ivec4> Quad;
 
-    diffuseColor = vec3(1, 1, 1);
+    diffuseColor = vec3(0.3, 0.2, 0.1);
     specularColor = vec3(1.0, 1.0, 1.0);
     shininess = 120.0;
 
@@ -660,24 +627,4 @@ Ground::Ground(const float r, const int n)
     vao = VaoFromQuads(Pnt, Nrm, Tex, Tan, Quad);
     count = Quad.size();
     shape = 4;
-}
-
-ScreenQuad::ScreenQuad()
-{
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
-	};
-	// Generate 1 buffer, put the resulting identifier in vertexbuffer
-	glGenBuffers(1, &vertexbuffer);
-
-	// The following commands will talk about our 'vertexbuffer' buffer
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-
-	// Give our vertices to OpenGL.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 }

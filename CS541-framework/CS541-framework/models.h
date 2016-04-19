@@ -73,14 +73,6 @@ public:
     virtual void DrawVAO();
 };
 
-class Earth : public Model
-{
-public:
-	Earth(const float n);
-	int day_texture;
-	int night_texture;
-};
-
 class Sphere: public Model
 {
 public:
@@ -97,13 +89,6 @@ class Ground: public Model
 {
 public:
     Ground(const float range, const int n);
-};
-
-class ScreenQuad
-{
-public:
-	GLuint vertexbuffer;
-	ScreenQuad();
 };
 
 class Ply: public Model

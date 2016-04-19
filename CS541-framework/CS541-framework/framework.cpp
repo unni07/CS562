@@ -47,33 +47,12 @@ int mouseX, mouseY;
 bool leftDown = false;
 bool middleDown = false;
 bool rightDown = false;
-bool ArrowRightPressed = false;
-bool ArrowLeftPressed = false;
-bool ArrowUpPressed = false;
-bool ArrowDownPressed = false;
-float cameraSpeed = 0.3;
 bool shifted;
 
 ////////////////////////////////////////////////////////////////////////
 // Called by GLUT when the scene needs to be redrawn.
 void ReDraw()
 {
-	if (ArrowUpPressed)
-	{
-		scene.zoom -= cameraSpeed;
-	}
-	if (ArrowDownPressed)
-	{
-		scene.zoom += cameraSpeed;
-	}
-	if (ArrowRightPressed)
-	{
-		scene.eyeSpin -= cameraSpeed;
-	}
-	if (ArrowLeftPressed)
-	{
-		scene.eyeSpin += cameraSpeed;
-	}
     DrawScene(scene);
     TwDraw();
     glutSwapBuffers();
@@ -102,75 +81,22 @@ void KeyboardDown(unsigned char key, int x, int y)
     switch(key) {
     case '0':
     case '1':
-		scene.RenderMode = 1;
-		break;
     case '2':
-		scene.RenderMode = 2;
-		break;
     case '3':
-		scene.RenderMode = 3;
-		break;
     case '4':
-		scene.RenderMode = 4;
-		break;
     case '5':
-		scene.RenderMode = 5;
-		break;
     case '6':
-		scene.RenderMode = 6;
-		break;
     case '7':
     case '8':
     case '9':
         scene.mode = key-'0';
         glutPostRedisplay();
         break;
+
     case 27:                    // Escape key
     case 'q':
         exit(0);
     }
-}
-
-void processSpecialKeys(int key, int x, int y) {
-
-	if (TwEventSpecialGLUT(key, x, y)) return;
-
-	if (key == GLUT_KEY_UP){
-		ArrowUpPressed = true;
-	}
-
-	if (key == GLUT_KEY_DOWN){
-		ArrowDownPressed = true;
-	}
-	
-	if (key == GLUT_KEY_LEFT){
-		ArrowLeftPressed = true;
-	}
-	
-	if (key == GLUT_KEY_RIGHT){
-		ArrowRightPressed = true;
-	}
-}
-
-void processSpecialUpKeys(int key, int x, int y) {
-
-	if (TwEventSpecialGLUT(key, x, y)) return;
-
-	if (key == GLUT_KEY_UP){
-		ArrowUpPressed = false;
-	}
-
-	if (key == GLUT_KEY_DOWN){
-		ArrowDownPressed = false;
-	}
-
-	if (key == GLUT_KEY_LEFT){
-		ArrowLeftPressed = false;
-	}
-
-	if (key == GLUT_KEY_RIGHT){
-		ArrowRightPressed = false;
-	}
 }
 
 void KeyboardUp(unsigned char key, int x, int y)
@@ -223,12 +149,12 @@ void MouseMotion(int x, int y)
     int dy = y-mouseY;
 
     if (leftDown && shifted) {
-        scene.lightSpin += dx/30.0f;
-        scene.lightTilt -= dy/30.0f; }
+        scene.lightSpin += dx/3.0f;
+        scene.lightTilt -= dy/3.0f; }
 
     else if (leftDown) {
-        scene.eyeSpin += dx/3.0f;
-        scene.eyeTilt += dy/3.0f; }
+        scene.eyeSpin += dx/2.0f;
+        scene.eyeTilt += dy/2.0f; }
 
 
     if (middleDown && shifted) {
@@ -345,21 +271,19 @@ int main(int argc, char** argv)
     glutMouseFunc(&MouseButton);
     glutMotionFunc(&MouseMotion);
     glutPassiveMotionFunc((GLUTmousemotionfun)TwEventMouseMotionGLUT);
-	
-	glutSpecialFunc(processSpecialKeys);
-	glutSpecialUpFunc(processSpecialUpKeys);
+    glutSpecialFunc((GLUTspecialfun)TwEventSpecialGLUT);
     TwGLUTModifiersFunc((int(TW_CALL*)())glutGetModifiers);
 
-    /*bar = TwNewBar("Tweaks");
-    TwDefine(" Tweaks size='200 70' ");
+    bar = TwNewBar("Tweaks");
+    TwDefine(" Tweaks size='200 300' ");
     TwAddButton(bar, "quit", (TwButtonCallback)Quit, NULL, " label='Quit' key=q ");
 
     TwAddVarCB(bar, "centralModel", TwDefineEnum("CentralModel", NULL, 0),
                SetModel, GetModel, NULL,
-               " enum='{Earth}");
+               " enum='0 {Teapot}, 1 {Bunny}, 2 {Dragon}, 3 {Sphere}' ");
     TwAddButton(bar, "Spheres", (TwButtonCallback)ToggleSpheres, NULL, " label='Spheres' ");
     TwAddButton(bar, "Ground", (TwButtonCallback)ToggleGround, NULL, " label='Ground' ");
-	*/
+
     InitializeScene(scene);
 
     // This function enters the event loop.
