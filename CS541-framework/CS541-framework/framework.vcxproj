@@ -105,6 +105,7 @@
     </ClCompile>
     <ClCompile Include="framework.cpp">
     </ClCompile>
+    <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="rply.c" />
     <ClCompile Include="scene.cpp">
     </ClCompile>
@@ -112,6 +113,23 @@
     </ClCompile>
     <ClCompile Include="models.cpp">
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AmbiantPass.frag" />
+    <None Include="AmbiantPass.vert" />
+    <None Include="GBuffer.frag" />
+    <None Include="GBuffer.vert" />
+    <None Include="GlobalLighting.frag" />
+    <None Include="GlobalLighting.vert" />
+    <None Include="lighting.frag" />
+    <None Include="lighting.vert" />
+    <None Include="reflection.frag" />
+    <None Include="reflection.vert" />
+    <None Include="shadow.frag" />
+    <None Include="shadow.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
