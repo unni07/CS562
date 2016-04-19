@@ -26,10 +26,18 @@ public:
     int nSpheres;
     bool drawSpheres;
     bool drawGround;
+	bool drawTeapot;
+	bool drawDragon;
+	bool drawHappy;
+	bool drawBunny;
 
     int centralType;
     int centralModel;
-    mat4 centralTr;
+    mat4 dragonTr;
+	mat4 happyTr;
+	mat4 bunnyTr;
+	mat4 horseTr;
+	mat4 centralTr;
 
     // Viewing transformation parameters;  Mouse buttons 1-3
     float front;
@@ -49,18 +57,36 @@ public:
     int width, height;
 
     // Shader programs
-	ShaderProgram lightingShader;
-	ShaderProgram geometryShader;
+    ShaderProgram lightingShader;
+	ShaderProgram shadowShader;
+	ShaderProgram reflectionShader;
+	ShaderProgram GBufferShader;
+	ShaderProgram AmbiantShader;
+	ShaderProgram GlobalLightingShader;
 
     // The polygon models
     Model* centralPolygons;
+	Model* dragonPolygons;
+	Model* happyPolygons;
+	Model* bunnyPolygons;
+	Model* horsePolygons;
     Model* spherePolygons;
     Model* groundPolygons;
+	Model* skyDome;
+	ScreenQuad* screenQuad;
 
     // Texture
     int groundColor;
+	int groundNormal;
+	int skyColor;
+	int RenderMode;
 };
 
 void InitializeScene(Scene &scene);
 void BuildScene(Scene &scene);
+void GBufferPass(Scene &scene);
+void GlobalPass(Scene &scene);
+void AmbiantPass(Scene &scene);
+void ReflectionSceneTop(Scene &scene);
+void ReflectionSceneBottom(Scene &scene);
 void DrawScene(Scene &scene);
