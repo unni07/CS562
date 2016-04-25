@@ -26,11 +26,16 @@ uniform float Time;
  vec3 T;
  float I;
 
+
+ vec3 Kd = vec3(0);
+vec3 Ks = vec3(0);
+
 vec3 FresnelValue()
 {
 	float value = 0.05f;
-	vec3 Ks = vec3(value,value,value);
+	Ks = vec3(value,value,value);
 	vec3 f = Ks + (1-Ks) * pow((1-max(dot(L,H),1.0f)),5.0);
+	Ks = f;
 	return f;
 }
 
@@ -66,19 +71,20 @@ vec3 RenderPonintLights(vec3 worldPosition)
 	vec3 pointLights = vec3(0);
 	
 	float Yposition = -2.0;
-	float constant = 0.1;
-	float linear = 0.5;
-	float exponential = 0.9f;
+	float constant = 0.5;
+	float linear = 0.1;
+	float exponential = 5.0f;
 	float dts = clamp(sin(Time/10),0.0,1);
 	float dtc = clamp(cos(Time/10),0.0,1);
-	for(int j=0; j< 10; j++) {
-	for(int i=0; i< 10; i++)
+	for(int j=0; j< 20; j++) {
+	for(int i=0; i< 20; i++)
 	{
-		vec3 pointLightPos  = vec3(45 - i*10, 45 - j*10, Yposition);
+		vec3 pointLightPos  = vec3(45 - i*5.0, 45 - j*5.0, Yposition);
 		vec3 pointLightDir = worldPosition - pointLightPos;
 		float distance = length(pointLightDir);
 		pointLightDir = normalize(pointLightDir);
-		vec3 pointColor = vec3(1.0f,1.0f,0.0f);
+		//vec3 pointColor = vec3(1.0f,1.0f,1.0f);
+		vec3 pointColor = vec3(dts,dtc,dtc);
 		float attinuation = constant + linear * distance + exponential * distance * distance;
 		pointLights += pointColor / attinuation;//  * max(dot(N,pointLightPos),0.0);
 	}
@@ -93,7 +99,7 @@ void main() {
 	vec3 worldPosition = texture(GpositionMap, texCoord.st).rgb;
     eyeVec = texture(EyeVecMap, texCoord.st).rgb;
 	lightVec = texture(LightVecMap, texCoord.st).rgb;
-	vec3 Kd = texture(groundColor, texCoord.st ).rgb;
+	 Kd = texture(groundColor, texCoord.st ).rgb;
 	shadowCoord = texture(ShadowCordMap, texCoord.st );
 
 	N = normalVec;
@@ -106,7 +112,7 @@ void main() {
 	float otherPart = diffuse * I;
 	
 	vec3 finalPointLight = vec3(0);
-	finalPointLight = RenderPonintLights(worldPosition) * 1.7;
+	finalPointLight = RenderPonintLights(worldPosition) * 5.7;
 
 
 	vec3 ambient = diffuse * Kd + finalPointLight;
@@ -129,13 +135,13 @@ void main() {
 			color = vec4(normalVec,1);
 	}
 	else if(RenderMode == 4) {
-			color = vec4(eyeVec,1);
+			color = vec4(Kd,1);
 	}
 	else if(RenderMode == 5) {
 			color = vec4(lightVec,1);
 	}
 	else if(RenderMode == 6) {
-			color = shadowCoord;
+			color =shadowCoord;
 	}
 	
 }
