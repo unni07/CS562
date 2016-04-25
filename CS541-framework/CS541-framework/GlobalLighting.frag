@@ -76,15 +76,15 @@ vec3 RenderPonintLights(vec3 worldPosition)
 	float exponential = 5.0f;
 	float dts = clamp(sin(Time/10),0.0,1);
 	float dtc = clamp(cos(Time/10),0.0,1);
-	for(int j=0; j< 20; j++) {
-	for(int i=0; i< 20; i++)
+	for(int j=0; j< 10; j++) {
+	for(int i=0; i< 10; i++)
 	{
-		vec3 pointLightPos  = vec3(45 - i*5.0, 45 - j*5.0, Yposition);
+		vec3 pointLightPos  = vec3(45 - i*5.0*2, 45 - j*5.0*2, Yposition);
 		vec3 pointLightDir = worldPosition - pointLightPos;
 		float distance = length(pointLightDir);
 		pointLightDir = normalize(pointLightDir);
 		//vec3 pointColor = vec3(1.0f,1.0f,1.0f);
-		vec3 pointColor = vec3(dts,dtc,dtc);
+		vec3 pointColor = vec3(0.0,0.8,1.0);
 		float attinuation = constant + linear * distance + exponential * distance * distance;
 		pointLights += pointColor / attinuation;//  * max(dot(N,pointLightPos),0.0);
 	}
